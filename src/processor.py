@@ -54,6 +54,15 @@ def get_exercise_stats(df):
     total_sessions=('date', 'nunique')       # Number of times exercise was done
   ).reset_index()
 
+  # Rename columns to natural names
+  result = result.rename(columns={
+    'exercise': 'Exercise',
+    'total_volume': 'Total Volume (kg)',
+    'max_weight': 'Max Weight (kg)',
+    'avg_weight': 'Avg Weight (kg)',
+    'total_sessions': 'Total Sessions'
+  })
+
   return result
 
 def get_progress_overtime(df):

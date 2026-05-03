@@ -7,16 +7,24 @@ This module orchestrates the complete workflow:
 4. Create PDF report with all results
 """
 
-from src.loader import load_data
+from src.loader import load_csv_data, load_sheets_data
 from src.processor import get_summary, get_exercise_stats, get_progress_overtime
 from src.charts import generate_progress_chart
 from src.report import generate_report
 from datetime import datetime
 
 def main():
-  """Main execution function - generates complete fitness report."""
-  # Load workout data from CSV file
-  df = load_data('data/workouts.csv')
+  """Main execution function - generates complete fitness report.
+
+  Set USE_SHEETS = True to load data from Google Sheets, or False to load
+  from the local CSV file at `data/workouts.csv`.
+  """
+  USE_SHEETS = True
+
+  if USE_SHEETS:
+    df = load_sheets_data('Fitness Report')
+  else:
+    df = load_csv_data('data/workouts.csv')
 
   # Calculate overall fitness summary (total volume, sessions, date range, etc.)
   summary = get_summary(df)

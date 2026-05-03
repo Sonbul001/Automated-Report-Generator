@@ -5,7 +5,7 @@ A Python application that analyzes workout data and generates comprehensive fitn
 ## Features
 
 ✨ **Data Processing**
-- Load and parse workout data from CSV files
+- Load and parse workout data from CSV files or Google Sheets
 - Calculate total volume (sets × weight × reps)
 - Track sessions over time
 - Group exercises by type
@@ -56,6 +56,8 @@ Required packages:
 - `pandas` - Data manipulation and analysis
 - `matplotlib` - Chart visualization
 - `reportlab` - PDF report generation
+- `gspread` - Google Sheets API integration
+- `google-auth` - Service account authentication for Sheets
 
 ## Usage
 
@@ -68,11 +70,26 @@ python main.py
 ```
 
 This will:
-1. Load workout data from `data/workouts.csv`
+1. Load workout data from `data/workouts.csv` or Google Sheets
 2. Calculate fitness statistics
 3. Generate a progress chart (PNG)
 4. Create a comprehensive PDF report
 5. Save both files to the `output/` directory with timestamps
+
+### Google Sheets Integration
+
+To load workout data from Google Sheets instead of CSV, place your service account credentials file as `credentials.json` in the project root and update `main.py`:
+
+```python
+USE_SHEETS = True
+```
+
+The default sheet name is `Fitness Report`, and the loader reads the first worksheet (`sheet1`).
+
+The Google Sheets workflow requires:
+- A valid `credentials.json` service account file
+- The sheet shared with the service account email
+- Column headers: `date`, `exercise`, `sets`, `reps`, `weight_kg`
 
 ### Expected Output
 
@@ -95,6 +112,8 @@ date,exercise,sets,reps,weight_kg
 2024-01-03,Bench Press,4,6,105
 ```
 
+If using Google Sheets, the sheet must expose the same column headers in the first row and the target sheet should be shared with your service account email.
+
 **Required columns:**
 - `date` - Workout date (YYYY-MM-DD format)
 - `exercise` - Exercise name
@@ -105,7 +124,8 @@ date,exercise,sets,reps,weight_kg
 ## Key Functions
 
 ### `src/loader.py`
-- `load_data(filepath)` - Load CSV workout data
+- `load_csv_data(file_path)` - Load and prepare CSV workout data
+- `load_sheets_data(sheet_name)` - Load and prepare workout data from Google Sheets
 
 ### `src/processor.py`
 - `get_summary(df)` - Calculate overall fitness summary

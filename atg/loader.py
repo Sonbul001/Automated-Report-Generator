@@ -31,8 +31,7 @@ def load_csv_data(file_path):
 
         return data
     except Exception as e:
-        print(f"An error occurred while loading the data: {e}")
-        return None
+        raise RuntimeError(f"An error occurred while loading the data: {e}")
 
 def load_sheets_data(sheet_name: str):
     """Load workout data from a Google Sheets spreadsheet.
@@ -63,5 +62,4 @@ def load_sheets_data(sheet_name: str):
 
         return data
     except Exception as e:
-        print(f"An error occurred while loading the data: {e}")
-        return None
+        raise RuntimeError(f"An error occurred while loading the data: {e}")

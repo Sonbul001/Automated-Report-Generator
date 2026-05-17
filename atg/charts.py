@@ -18,24 +18,25 @@ def generate_progress_chart(df, output_path):
   Returns:
       str: The output_path (for chaining/verification)
   """
-  # Plot a line for each exercise
-  for column in df.columns:
-    plt.plot(df.index, df[column], label=column, marker='o')
+  # Plot each exercise line chart using pandas plotting
+  fig, ax = plt.subplots()
+  df.plot(ax=ax, marker='o', linestyle='-', linewidth=1.5)
 
   # Configure chart labels and legend
-  plt.xlabel('Date')
-  plt.ylabel('Max Weight (kg)')
-  plt.title('Workout Progress Over Time')
-  plt.legend()
+  ax.set_xlabel('Date')
+  ax.set_ylabel('Max Weight (kg)')
+  ax.set_title('Workout Progress Over Time')
+  ax.legend()
+  ax.grid(True, linestyle='--', alpha=0.3)
 
-  # Rotate x-axis labels for better readability
-  plt.xticks(rotation=45)
+  # Format x-axis dates and improve label placement
+  fig.autofmt_xdate(rotation=45, ha='right')
 
   # Adjust layout to prevent label cutoff
-  plt.tight_layout()
+  fig.tight_layout()
 
   # Save chart to file and clean up
-  plt.savefig(output_path)
-  plt.close()  # Close the figure to free memory
+  fig.savefig(output_path)
+  plt.close(fig)
 
   return output_path

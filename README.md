@@ -33,10 +33,11 @@ automated-report-generator/
 ├── data/
 │   └── workouts.csv       # Sample workout data
 ├── output/                # Generated reports and charts
-└── src/
+└── atg/
+    ├── __init__.py        # Package initialization
     ├── loader.py          # Data loading utilities
     ├── processor.py       # Data processing and aggregations
-    ├── charts.py          # Chart generation
+    ├── charts.py          # Chart visualization
     └── report.py          # PDF report generation
 ```
 
@@ -63,33 +64,32 @@ Required packages:
 
 ### Basic Usage
 
-Run the main script to generate a complete report:
+Run the main script to generate a complete report from local CSV:
 
 ```bash
 python main.py
 ```
 
 This will:
-1. Load workout data from `data/workouts.csv` or Google Sheets
+1. Load workout data from `data/workouts.csv`
 2. Calculate fitness statistics
 3. Generate a progress chart (PNG)
 4. Create a comprehensive PDF report
 5. Save both files to the `output/` directory with timestamps
 
-### Google Sheets Integration
+### Load from Google Sheets
 
-To load workout data from Google Sheets instead of CSV, place your service account credentials file as `credentials.json` in the project root and update `main.py`:
+To load workout data from Google Sheets instead of the local CSV file:
 
-```python
-USE_SHEETS = True
+```bash
+python main.py --use-sheets
 ```
 
-The default sheet name is `Fitness Report`, and the loader reads the first worksheet (`sheet1`).
-
-The Google Sheets workflow requires:
-- A valid `credentials.json` service account file
-- The sheet shared with the service account email
+This requires:
+- A valid `credentials.json` service account file in the project root
+- The Google Sheet shared with the service account email
 - Column headers: `date`, `exercise`, `sets`, `reps`, `weight_kg`
+- The default sheet name is `Fitness Report`
 
 ### Expected Output
 

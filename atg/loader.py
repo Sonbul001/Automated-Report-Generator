@@ -4,10 +4,13 @@ Handles loading, parsing, and initial data preparation from CSV
 files or Google Sheets using a service account.
 """
 
+from typing import Optional
+
 import pandas as pd
 import gspread
 
-def load_csv_data(file_path):
+
+def load_csv_data(file_path: str) -> Optional[pd.DataFrame]:
     """Load workout data from CSV and prepare it for analysis.
 
     Args:
@@ -33,7 +36,8 @@ def load_csv_data(file_path):
     except Exception as e:
         raise RuntimeError(f"An error occurred while loading the data: {e}")
 
-def load_sheets_data(sheet_name: str):
+
+def load_sheets_data(sheet_name: str) -> Optional[pd.DataFrame]:
     """Load workout data from a Google Sheets spreadsheet.
 
     Args:

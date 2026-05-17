@@ -3,9 +3,11 @@
 Creates matplotlib charts showing progress over time.
 """
 
+import pandas as pd
 import matplotlib.pyplot as plt
 
-def generate_progress_chart(df, output_path):
+
+def generate_progress_chart(df: pd.DataFrame, output_path: str) -> str:
   """Generate and save a progress chart showing max weight over time.
 
   Creates a line chart with one line per exercise, showing the maximum

@@ -5,7 +5,8 @@ Calculates summary statistics, per-exercise metrics, and progress tracking.
 
 import pandas as pd
 
-def get_summary(df):
+
+def get_summary(df: pd.DataFrame) -> dict:
   """Calculate overall fitness summary statistics.
 
   Args:
@@ -34,7 +35,8 @@ def get_summary(df):
     'date_range': days_diff                  # Days between first and last workout
   }
 
-def get_exercise_stats(df):
+
+def get_exercise_stats(df: pd.DataFrame) -> pd.DataFrame:
   """Calculate statistics for each exercise.
 
   Args:
@@ -65,7 +67,8 @@ def get_exercise_stats(df):
 
   return result
 
-def get_progress_overtime(df):
+
+def get_progress_overtime(df: pd.DataFrame) -> pd.DataFrame:
   """Track maximum weight over time for each exercise.
 
   Creates a pivot table with dates as rows and exercises as columns,

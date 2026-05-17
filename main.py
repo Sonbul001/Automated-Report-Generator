@@ -14,7 +14,8 @@ from atg import generate_report
 from datetime import datetime
 import argparse
 
-def main(use_sheets=False):
+
+def main(use_sheets: bool = False) -> None:
   """Main execution function - generates complete fitness report.
 
   Set USE_SHEETS = True to load data from Google Sheets, or False to load
@@ -49,6 +50,7 @@ def main(use_sheets=False):
   generate_report(summary, stats, chart, f'{output_path}_report.pdf')
 
   print(f"Report generated: output/{timestamp}_report.pdf")
+
 
 if __name__ == "__main__":
   parser = argparse.ArgumentParser()

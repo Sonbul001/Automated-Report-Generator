@@ -3,12 +3,16 @@
 Creates professional PDF reports combining fitness summary, statistics, and charts.
 """
 
+import pandas as pd
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.units import inch
 from reportlab.lib import colors
 
-def generate_report(summary, stats, chart, output_path):
+
+def generate_report(
+    summary: dict, stats: pd.DataFrame, chart: str, output_path: str
+) -> None:
   """Generate a comprehensive PDF fitness report.
 
   Creates a multi-page PDF containing:

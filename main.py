@@ -7,10 +7,10 @@ This module orchestrates the complete workflow:
 4. Create PDF report with all results
 """
 
-from src.loader import load_csv_data, load_sheets_data
-from src.processor import get_summary, get_exercise_stats, get_progress_overtime
-from src.charts import generate_progress_chart
-from src.report import generate_report
+from atg import load_csv_data, load_sheets_data
+from atg import get_summary, get_exercise_stats, get_progress_overtime
+from atg import generate_progress_chart
+from atg import generate_report
 from datetime import datetime
 
 def main():
